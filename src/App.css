@@ -1,18 +1,31 @@
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/inter/800.css';
-@import '@fontsource/inter/900.css';
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/inter/800.css";
+@import "@fontsource/inter/900.css";
 
-@import '@fontsource/space-grotesk/400.css';
-@import '@fontsource/space-grotesk/500.css';
-@import '@fontsource/space-grotesk/600.css';
-@import '@fontsource/space-grotesk/700.css';
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
 
 @import "tailwindcss";
 
 @theme {
   --font-inter: "Inter", "sans-serif";
   --font-space: '"Space Grotesk"', "sans-serif";
+
+  --color-grey: oklch(0.94 0.01 250);
+  --color-charcoal: oklch(0.28 0.03 250);
+  --color-ocean-blue: oklch(0.55 0.12 240);
+  --color-gold: oklch(0.75 0.1 85);
+  --color-bg: oklch(0.98 0.01 250);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-charcoal);
+  }
 }
