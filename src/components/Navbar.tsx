@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import Button from './Button'
 
 const homeSectionLinks = [
   { label: 'About', id: 'about' },
@@ -10,6 +11,7 @@ const homeSectionLinks = [
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [hoveredNav, setHoveredNav] = useState<string | null>(null)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -75,30 +77,33 @@ function Navbar() {
   const isProjectsActive = location.pathname === '/projects'
 
   const desktopLinkClass = (isActive: boolean) =>
-    `relative cursor-pointer text-sm font-semibold transition-colors ${
+    `relative rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
       isActive ? 'text-ocean-blue' : 'text-charcoal hover:text-ocean-blue'
     }`
 
   const renderDesktopLink = (
+    key: string,
     label: string,
     onClick: () => void,
     isActive: boolean,
   ) => (
     <motion.button
+      key={key}
       type="button"
       onClick={onClick}
+      onHoverStart={() => setHoveredNav(key)}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.97 }}
       className={desktopLinkClass(isActive)}
     >
-      {label}
-      <motion.span
-        className={`absolute -bottom-1 left-0 h-[2px] w-full origin-left bg-ocean-blue ${
-          isActive ? 'scale-x-100' : 'scale-x-0'
-        }`}
-        whileHover={{ scaleX: 1 }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
-      />
+      {hoveredNav === key && (
+        <motion.span
+          layoutId="desktop-nav-hover"
+          className="absolute inset-0 rounded-full bg-ocean-blue/10"
+          transition={{ type: 'spring', stiffness: 360, damping: 28 }}
+        />
+      )}
+      <span className="relative z-10">{label}</span>
     </motion.button>
   )
 
@@ -114,7 +119,7 @@ function Navbar() {
       initial={{ opacity: 0, y: -24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
-      className="sticky top-0 z-50 border-b border-charcoal/10 bg-grey/95 backdrop-blur"
+      className="sticky top-0 z-50 border-b border-white/25 bg-grey"
     >
       <nav
         className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-8"
@@ -136,60 +141,47 @@ function Navbar() {
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12, duration: 0.35 }}
-          className="hidden items-center justify-center gap-8 lg:flex"
+          onHoverEnd={() => setHoveredNav(null)}
+          className="hidden items-center justify-center gap-2 rounded-full border border-white/30 bg-white/50 px-3 py-2 backdrop-blur-md lg:flex"
         >
-          <motion.button
-            type="button"
-            onClick={handleHomeClick}
+          {renderDesktopLink('home', 'Home', handleHomeClick, isHomeActive)}
+
+          {homeSectionLinks.map((link) =>
+            renderDesktopLink(
+              link.id,
+              link.label,
+              () => handleSectionNavigation(link.id),
+              isSectionActive(link.id),
+            ),
+          )}
+
+          <motion.div
+            onHoverStart={() => setHoveredNav('projects')}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className={desktopLinkClass(isHomeActive)}
+            className="relative"
           >
-            Home
-            <motion.span
-              className={`absolute -bottom-1 left-0 h-[2px] w-full origin-left bg-ocean-blue ${
-                isHomeActive ? 'scale-x-100' : 'scale-x-0'
-              }`}
-              whileHover={{ scaleX: 1 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-            />
-          </motion.button>
-
-          {homeSectionLinks.map((link) => (
-            <div key={link.id}>
-              {renderDesktopLink(
-                link.label,
-                () => handleSectionNavigation(link.id),
-                isSectionActive(link.id),
-              )}
-            </div>
-          ))}
-
-          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
             <NavLink to="/projects" className={desktopLinkClass(isProjectsActive)}>
-              Projects
-              <motion.span
-                className={`absolute -bottom-1 left-0 h-[2px] w-full origin-left bg-ocean-blue ${
-                  isProjectsActive ? 'scale-x-100' : 'scale-x-0'
-                }`}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
-              />
+              {hoveredNav === 'projects' && (
+                <motion.span
+                  layoutId="desktop-nav-hover"
+                  className="absolute inset-0 rounded-full bg-ocean-blue/10"
+                  transition={{ type: 'spring', stiffness: 360, damping: 28 }}
+                />
+              )}
+              <span className="relative z-10">Projects</span>
             </NavLink>
           </motion.div>
         </motion.div>
 
         <div className="hidden items-center justify-end lg:flex">
-          <motion.button
-            type="button"
+          <Button
             onClick={handleMeetingNavigation}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.78 }}
-            transition={{ type: 'spring', stiffness: 520, damping: 20, mass: 0.45 }}
-            className="rounded-full bg-gold px-5 py-3 text-sm font-semibold text-charcoal shadow-sm transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-gold/60 focus:ring-offset-2 focus:ring-offset-grey"
+            variant="gold"
+            className="rounded-md px-5 text-sm font-bold focus:ring-offset-grey"
           >
             Book a Meeting
-          </motion.button>
+          </Button>
         </div>
 
         <motion.button
@@ -223,7 +215,7 @@ function Navbar() {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: '100%', opacity: 0.96 }}
               transition={{ type: 'spring', stiffness: 280, damping: 28 }}
-              className="fixed right-0 top-0 z-50 flex h-dvh w-[min(88vw,24rem)] flex-col border-l border-white/30 bg-white/45 px-5 pb-6 pt-5 shadow-[0_18px_50px_rgba(24,39,75,0.18)] backdrop-blur-xl lg:hidden"
+              className="fixed right-0 top-0 z-50 flex h-full w-[min(88vw,24rem)] flex-col border-l border-white/30 bg-white px-5 pb-6 pt-5 shadow-[0_18px_50px_rgba(24,39,75,0.18)] lg:hidden"
             >
               <div className="mb-8 flex items-center justify-between">
                 <span className="font-space text-base font-bold tracking-[0.16em] text-charcoal uppercase">
@@ -270,15 +262,13 @@ function Navbar() {
               </NavLink>
               </div>
 
-              <motion.button
-                type="button"
+              <Button
                 onClick={handleMeetingNavigation}
-                whileTap={{ scale: 0.88 }}
-                transition={{ type: 'spring', stiffness: 520, damping: 20, mass: 0.45 }}
-                className="mt-6 rounded-full bg-gold px-5 py-3 text-sm font-semibold text-charcoal transition hover:brightness-95"
+                variant="gold"
+                className="mt-6 rounded-md px-5 text-white"
               >
                 Book a Meeting
-              </motion.button>
+              </Button>
             </motion.div>
           </>
         )}

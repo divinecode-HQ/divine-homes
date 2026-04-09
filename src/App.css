@@ -19,13 +19,22 @@
   --color-grey: oklch(0.94 0.01 250);
   --color-charcoal: oklch(0.28 0.03 250);
   --color-ocean-blue: oklch(0.55 0.12 240);
-  --color-gold: oklch(0.75 0.1 85);
+  --color-gold: #E4C46A;
   --color-bg: oklch(0.98 0.01 250);
+
+  --breakpoint-xs: 480px;
 }
 
 @layer base {
-  body {
+  body, html {
+    margin: 0;
     background-color: var(--color-bg);
     color: var(--color-charcoal);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
   }
 }
