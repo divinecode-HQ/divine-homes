@@ -77,7 +77,7 @@ function Navbar() {
   const isProjectsActive = location.pathname === '/projects'
 
   const desktopLinkClass = (isActive: boolean) =>
-    `relative rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+    `relative rounded-full px-4 py-2 text-sm font-semibold outline-none transition-colors focus:outline-none focus-visible:outline-none ${
       isActive ? 'text-ocean-blue' : 'text-charcoal hover:text-ocean-blue'
     }`
 
@@ -108,7 +108,7 @@ function Navbar() {
   )
 
   const mobileLinkClass = (isActive: boolean) =>
-    `rounded-2xl border px-4 py-3 text-left text-sm font-semibold backdrop-blur-sm transition-colors ${
+    `rounded-2xl border px-4 py-3 text-left text-sm font-semibold outline-none backdrop-blur-sm transition-colors focus:outline-none focus-visible:outline-none ${
       isActive
         ? 'border-ocean-blue/25 bg-ocean-blue/12 text-ocean-blue'
         : 'border-white/35 bg-white/35 text-charcoal hover:border-gold/30 hover:bg-gold/12 hover:text-charcoal'
@@ -131,7 +131,7 @@ function Navbar() {
             onClick={handleHomeClick}
             whileHover={{ x: 2 }}
             whileTap={{ scale: 0.98 }}
-            className="font-space text-lg font-bold tracking-[0.18em] text-charcoal uppercase"
+            className="font-space text-lg font-bold tracking-[0.18em] text-charcoal uppercase outline-none focus:outline-none focus-visible:outline-none"
           >
             Divine Homes
           </motion.button>
@@ -190,7 +190,7 @@ function Navbar() {
           aria-label="Toggle navigation menu"
           onClick={() => setIsMenuOpen((open) => !open)}
           whileTap={{ scale: 0.9 }}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/15 bg-white/60 text-charcoal backdrop-blur-sm lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/15 bg-white/60 text-charcoal outline-none backdrop-blur-sm focus:outline-none focus-visible:outline-none lg:hidden"
         >
           <Icon icon={isMenuOpen ? 'mdi:close' : 'mdi:menu'} className="text-[1.35rem]" />
         </motion.button>
@@ -226,7 +226,7 @@ function Navbar() {
                   type="button"
                   onClick={() => setIsMenuOpen(false)}
                   whileTap={{ scale: 0.9 }}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/15 bg-white/60 text-charcoal backdrop-blur-sm"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/15 bg-white/60 text-charcoal outline-none backdrop-blur-sm focus:outline-none focus-visible:outline-none"
                 >
                   <Icon icon="mdi:close" className="text-[1.25rem]" />
                 </motion.button>

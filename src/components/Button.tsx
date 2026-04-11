@@ -31,7 +31,7 @@ function Button({
   variant = 'primary',
 }: ButtonProps) {
   const classes =
-    `inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-offset-2 ${variantClasses[variant]} ${className}`.trim()
+    `inline-flex items-center justify-center appearance-none border-0 rounded-md px-6 py-3 text-sm font-semibold shadow-sm outline-none transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus-visible:outline-none ${variantClasses[variant]} ${className}`.trim()
 
   const content = to ? (
     <Link to={to} className={classes}>
