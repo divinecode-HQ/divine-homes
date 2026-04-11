@@ -120,8 +120,23 @@ function ServicesSection() {
     setActiveIndex(index)
   }
 
+  const handleArrowScroll = (direction: 'prev' | 'next') => {
+    const nextIndex =
+      direction === 'next'
+        ? Math.min(activeIndex + 1, totalCards - 1)
+        : Math.max(activeIndex - 1, 0)
+
+    scrollToCard(nextIndex)
+  }
+
   return (
-    <div className="w-full h-fit py-6">
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="w-full h-fit py-6"
+    >
       <div
         ref={scrollRef}
         onScroll={updateActiveIndex}
@@ -138,23 +153,43 @@ function ServicesSection() {
         ))}
       </div>
 
-      <div className="mt-5 flex items-center justify-center gap-2">
-        {services.map((service, index) => (
-          <button
-            key={service.title}
-            type="button"
-            aria-label={`Scroll to ${service.title}`}
-            aria-pressed={activeIndex === index}
-            onClick={() => scrollToCard(index)}
-            className={`h-2.5 w-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gold/55 focus:ring-offset-2 focus:ring-offset-white ${
-              activeIndex === index
-                ? 'bg-gold'
-                : 'w-2.5 bg-charcoal/18 hover:bg-ocean-blue/45'
-            }`}
-          />
-        ))}
+      <div className="mt-5 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          aria-label="Scroll services left"
+          onClick={() => handleArrowScroll('prev')}
+          className="hidden h-10 w-10 items-center justify-center rounded-full border border-black/8 bg-white text-charcoal transition hover:border-ocean-blue/22 hover:text-ocean-blue focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-white lg:inline-flex"
+        >
+          <Icon icon="mdi:arrow-left" className="text-lg" />
+        </button>
+
+        <div className="flex items-center justify-center gap-2">
+          {services.map((service, index) => (
+            <button
+              key={service.title}
+              type="button"
+              aria-label={`Scroll to ${service.title}`}
+              aria-pressed={activeIndex === index}
+              onClick={() => scrollToCard(index)}
+              className={`h-2.5 w-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gold/55 focus:ring-offset-2 focus:ring-offset-white ${
+                activeIndex === index
+                  ? 'bg-gold'
+                  : 'w-2.5 bg-charcoal/18 hover:bg-ocean-blue/45'
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          aria-label="Scroll services right"
+          onClick={() => handleArrowScroll('next')}
+          className="hidden h-10 w-10 items-center justify-center rounded-full border border-black/8 bg-white text-charcoal transition hover:border-ocean-blue/22 hover:text-ocean-blue focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-white lg:inline-flex"
+        >
+          <Icon icon="mdi:arrow-right" className="text-lg" />
+        </button>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

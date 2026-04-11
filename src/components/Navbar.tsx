@@ -4,10 +4,8 @@ import { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import Button from './Button'
 
-const homeSectionLinks = [
-  { label: 'About', id: 'about' },
-  { label: 'Contact', id: 'contact' },
-]
+const aboutLink = { label: 'About', id: 'about' }
+const contactLink = { label: 'Contact', id: 'contact' }
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -16,6 +14,7 @@ function Navbar() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMenuOpen(false)
   }, [location.pathname, location.hash])
 
@@ -146,13 +145,11 @@ function Navbar() {
         >
           {renderDesktopLink('home', 'Home', handleHomeClick, isHomeActive)}
 
-          {homeSectionLinks.map((link) =>
-            renderDesktopLink(
-              link.id,
-              link.label,
-              () => handleSectionNavigation(link.id),
-              isSectionActive(link.id),
-            ),
+          {renderDesktopLink(
+            aboutLink.id,
+            aboutLink.label,
+            () => handleSectionNavigation(aboutLink.id),
+            isSectionActive(aboutLink.id),
           )}
 
           <motion.div
@@ -172,6 +169,13 @@ function Navbar() {
               <span className="relative z-10">Projects</span>
             </NavLink>
           </motion.div>
+
+          {renderDesktopLink(
+            contactLink.id,
+            contactLink.label,
+            () => handleSectionNavigation(contactLink.id),
+            isSectionActive(contactLink.id),
+          )}
         </motion.div>
 
         <div className="hidden items-center justify-end lg:flex">
@@ -242,17 +246,14 @@ function Navbar() {
                 Home
               </motion.button>
 
-              {homeSectionLinks.map((link) => (
-                <motion.button
-                  key={link.id}
-                  type="button"
-                  onClick={() => handleSectionNavigation(link.id)}
-                  whileTap={{ scale: 0.96, x: -2 }}
-                  className={mobileLinkClass(isSectionActive(link.id))}
-                >
-                  {link.label}
-                </motion.button>
-              ))}
+              <motion.button
+                type="button"
+                onClick={() => handleSectionNavigation(aboutLink.id)}
+                whileTap={{ scale: 0.96, x: -2 }}
+                className={mobileLinkClass(isSectionActive(aboutLink.id))}
+              >
+                {aboutLink.label}
+              </motion.button>
 
               <NavLink
                 to="/projects"
@@ -260,6 +261,15 @@ function Navbar() {
               >
                 Projects
               </NavLink>
+
+              <motion.button
+                type="button"
+                onClick={() => handleSectionNavigation(contactLink.id)}
+                whileTap={{ scale: 0.96, x: -2 }}
+                className={mobileLinkClass(isSectionActive(contactLink.id))}
+              >
+                {contactLink.label}
+              </motion.button>
               </div>
 
               <Button
