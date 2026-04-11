@@ -118,8 +118,8 @@ function AboutSection() {
           className="self-start"
         >
           <div className="relative mx-auto max-w-xl">
-            <div className="absolute -left-5 -top-5 h-28 w-28 rounded-[1.5rem] bg-gold/20 blur-2xl" />
-            <div className="absolute -bottom-6 -right-6 h-40 w-40 rounded-[2rem] bg-ocean-blue/14 blur-3xl" />
+            <div className="absolute -left-5 -top-5 h-28 w-28 rounded-3xl bg-gold/20 blur-2xl" />
+            <div className="absolute -bottom-6 -right-6 h-40 w-40 rounded-4xl bg-ocean-blue/14 blur-3xl" />
 
             <div className="relative overflow-hidden rounded-[26px] border border-white/70 bg-white p-3 shadow-[0_24px_60px_rgba(15,23,42,0.14)]">
               <div className="grid gap-3 sm:grid-cols-[1.15fr_0.85fr]">

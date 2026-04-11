@@ -9,7 +9,7 @@ function HeroSection() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       />
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-[4px]" />
+      <div className="absolute inset-0 bg-white/10 backdrop-blur-xs" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,252,0.18),rgba(24,39,75,0.24))]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">

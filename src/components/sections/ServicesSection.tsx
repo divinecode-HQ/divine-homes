@@ -131,7 +131,7 @@ function ServicesSection() {
           <div
             key={service.title}
             data-service-card
-            className="w-[88%] min-w-[88%] snap-center sm:w-[70%] sm:min-w-[70%] lg:w-[24rem] lg:min-w-[24rem] xl:w-[25.5rem] xl:min-w-[25.5rem]"
+            className="w-[88%] min-w-[88%] snap-center sm:w-[70%] sm:min-w-[70%] lg:w-[24rem] lg:min-w-[24rem] xl:w-102 xl:min-w-102"
           >
             <ServiceCard service={service} />
           </div>
