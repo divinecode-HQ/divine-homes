@@ -1,37 +1,41 @@
 import { Icon } from '@iconify/react'
-import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import projectImageOne from '../../assets/images/divine-homes-modern-building-construction.jpg'
 import projectImageTwo from '../../assets/images/hero-section.png'
 
 type Project = {
   description?: string
-  title: string
-  image?: string
+  images?: string[]
   isMoreCard?: boolean
+  title: string
 }
 
 const projects: Project[] = [
   {
     title: 'Luxury Residential Building',
-    description: 'A refined residence delivered with premium finishing and careful structural detailing.',
-    image: projectImageOne,
+    description:
+      'A refined residence delivered with premium finishing and careful structural detailing.',
+    images: [projectImageOne, projectImageTwo, projectImageOne],
   },
   {
     title: 'Modern House Renovation',
-    description: 'A full renovation project designed to improve comfort, value, and visual appeal.',
-    image: projectImageTwo,
+    description:
+      'A full renovation project designed to improve comfort, value, and visual appeal.',
+    images: [projectImageTwo, projectImageOne, projectImageTwo],
   },
   {
     title: 'Contemporary Family Home',
-    description: 'A clean, modern build executed with durable materials and coordinated site delivery.',
-    image: projectImageOne,
+    description:
+      'A clean, modern build executed with durable materials and coordinated site delivery.',
+    images: [projectImageOne, projectImageTwo, projectImageOne],
   },
   {
     title: 'Premium Interior Upgrade',
-    description: 'A carefully managed upgrade focused on stronger function, cleaner finishes, and a brighter interior.',
-    image: projectImageTwo,
+    description:
+      'A carefully managed upgrade focused on stronger function, cleaner finishes, and a brighter interior.',
+    images: [projectImageTwo, projectImageOne, projectImageTwo],
   },
   {
     title: 'View More',
@@ -43,55 +47,185 @@ type ProjectCardProps = {
   project: Project
 }
 
-function ProjectCard({ project }: ProjectCardProps) {
-  if (project.isMoreCard) {
-    return (
-      <motion.article
-        whileHover={{ y: -4, scale: 1.03 }}
-        transition={{ duration: 0.32, ease: 'easeOut' }}
-        className="flex min-h-[27rem] items-center justify-center rounded-[20px] bg-grey/14 p-6"
+function ImageIndicators({
+  activeImage,
+  onSelect,
+}: {
+  activeImage: number
+  onSelect: (index: number) => void
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      {[0, 1, 2].map((index) => (
+        <button
+          key={index}
+          type="button"
+          aria-label={`Show project image ${index + 1}`}
+          aria-pressed={activeImage === index}
+          onClick={() => onSelect(index)}
+          className={`h-2.5 w-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal ${
+            activeImage === index
+              ? 'bg-gold'
+              : 'bg-white/30 hover:bg-white/55'
+          }`}
+        />
+      ))}
+    </div>
+  )
+}
+
+function MoreProjectCard() {
+  return (
+    <motion.article
+      whileHover={{ y: -4, scale: 1.03 }}
+      transition={{ duration: 0.32, ease: 'easeOut' }}
+      className="flex min-h-[28rem] items-center justify-center rounded-[20px] bg-grey/14 p-6"
+    >
+      <Link
+        to="/projects"
+        className="inline-flex items-center justify-center rounded-md border border-white/22 bg-white/8 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/14 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal"
       >
-        <Link
-          to="/projects"
-          className="inline-flex items-center justify-center rounded-md border border-white/22 bg-white/8 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/14 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal"
-        >
-          View More
-        </Link>
-      </motion.article>
-    )
+        View More
+      </Link>
+    </motion.article>
+  )
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
+  const [activeImage, setActiveImage] = useState(0)
+  const [isUserControlled, setIsUserControlled] = useState(false)
+  const hoverDelayRef = useRef<number | null>(null)
+  const intervalRef = useRef<number | null>(null)
+  const resumeTimeoutRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (!isHovered) {
+      if (hoverDelayRef.current) {
+        window.clearTimeout(hoverDelayRef.current)
+      }
+
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current)
+      }
+
+      if (resumeTimeoutRef.current) {
+        window.clearTimeout(resumeTimeoutRef.current)
+      }
+
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsUserControlled(false)
+      setActiveImage(0)
+      return
+    }
+
+    if (isUserControlled) {
+      return
+    }
+
+    hoverDelayRef.current = window.setTimeout(() => {
+      intervalRef.current = window.setInterval(() => {
+        setActiveImage((current) => (current + 1) % 3)
+      }, 6000)
+    }, 1000)
+
+    return () => {
+      if (hoverDelayRef.current) {
+        window.clearTimeout(hoverDelayRef.current)
+      }
+
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current)
+      }
+    }
+  }, [isHovered, isUserControlled])
+
+  useEffect(() => {
+    return () => {
+      if (hoverDelayRef.current) {
+        window.clearTimeout(hoverDelayRef.current)
+      }
+
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current)
+      }
+
+      if (resumeTimeoutRef.current) {
+        window.clearTimeout(resumeTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  if (project.isMoreCard) {
+    return <MoreProjectCard />
+  }
+
+  const handleDotSelect = (index: number) => {
+    if (intervalRef.current) {
+      window.clearInterval(intervalRef.current)
+    }
+
+    if (hoverDelayRef.current) {
+      window.clearTimeout(hoverDelayRef.current)
+    }
+
+    if (resumeTimeoutRef.current) {
+      window.clearTimeout(resumeTimeoutRef.current)
+    }
+
+    setIsUserControlled(true)
+    setActiveImage(index)
+
+    if (isHovered) {
+      resumeTimeoutRef.current = window.setTimeout(() => {
+        setIsUserControlled(false)
+      }, 2200)
+    }
   }
 
   return (
     <motion.article
       whileHover={{ y: -4, scale: 1.03 }}
       transition={{ duration: 0.32, ease: 'easeOut' }}
-      className="group relative min-h-[27rem] overflow-hidden rounded-[20px]"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="group relative min-h-[28rem] overflow-hidden rounded-[20px]"
     >
-      <motion.img
-        src={project.image}
-        alt={project.title}
-        className="absolute inset-0 h-full w-full object-cover"
-        whileHover={{ scale: 1.06 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-      />
+      <div className="absolute inset-0">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={activeImage}
+            src={project.images?.[activeImage]}
+            alt={`${project.title} view ${activeImage + 1}`}
+            initial={{ opacity: 0, x: 24, scale: 1.02 }}
+            animate={{ opacity: 1, x: 0, scale: isHovered ? 1.06 : 1 }}
+            exit={{ opacity: 0, x: -24, scale: 1.04 }}
+            transition={{ duration: 0.38, ease: 'easeOut' }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </AnimatePresence>
+      </div>
 
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,15,20,0.08),rgba(10,15,20,0.72)_72%,rgba(10,15,20,0.92))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,15,20,0.08),rgba(10,15,20,0.62)_72%,rgba(10,15,20,0.9))]" />
       <div className="absolute inset-0 bg-black/6 transition-colors duration-300 group-hover:bg-black/14" />
 
-      <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-        <div className="translate-y-4 text-white transition-transform duration-300 ease-out group-hover:-translate-y-2">
-          <h3 className="font-space text-2xl font-bold">
-            {project.title}
-          </h3>
+      <div className="absolute inset-x-0 bottom-0 px-6 pt-6 pb-10 sm:px-7 sm:pt-7 sm:pb-11">
+        <div className="translate-y-[3.75rem] text-white transition-transform duration-300 ease-out group-hover:translate-y-4">
+          <h3 className="font-space text-2xl font-bold">{project.title}</h3>
 
           <p className="mt-3 max-w-sm text-sm leading-6 text-white/76">
             {project.description}
           </p>
 
-          <div className="pointer-events-none mt-5 translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+          <div className="mt-4">
+            <ImageIndicators activeImage={activeImage} onSelect={handleDotSelect} />
+          </div>
+
+          <div className="pointer-events-none mt-3 translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+
             <Link
               to="/projects"
-              className="inline-flex items-center justify-center rounded-md border border-white/28 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal"
+              className="mt-2 inline-flex items-center justify-center rounded-md border border-white/28 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal"
             >
               View Project
             </Link>
@@ -194,7 +328,7 @@ function ProjectsSection() {
               <div
                 key={project.title}
                 data-project-card
-                className="w-[88%] min-w-[88%] snap-center sm:w-[72%] sm:min-w-[72%] lg:w-[32rem] lg:min-w-[32rem]"
+                className="w-[88%] min-w-[88%] snap-center sm:w-[72%] sm:min-w-[72%] lg:w-[22rem] lg:min-w-[22rem] xl:w-[24rem] xl:min-w-[24rem]"
               >
                 <ProjectCard project={project} />
               </div>

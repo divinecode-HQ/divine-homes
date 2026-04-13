@@ -37,7 +37,7 @@ const trustPoints = [
 
 function AboutSection() {
   return (
-    <section className="bg-[#F9FAFB] py-18 sm:py-22 lg:py-24">
+    <section id="about" className="scroll-mt-12 bg-[#F9FAFB] py-18 sm:py-22 lg:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-14 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
