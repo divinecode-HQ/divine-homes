@@ -15,7 +15,7 @@ function CtaSection() {
         >
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(249,250,251,0.98)_0%,rgba(249,250,251,0.96)_44%,rgba(249,250,251,0.72)_72%,rgba(249,250,251,0.28)_100%)]" />
 
-          <div className="pointer-events-none absolute -bottom-34 -right-10 h-[18rem] w-[18rem] max-[400px]:hidden md:-bottom-20 md:right-0 md:h-[24rem] md:w-[24rem] lg:-bottom-24 lg:h-[29rem] lg:w-[29rem]">
+          <div className="pointer-events-none absolute -bottom-34 -right-10 h-72 w-[18rem] max-[400px]:hidden md:-bottom-20 md:right-0 md:h-96 md:w-[24rem] lg:-bottom-24 lg:h-116 lg:w-116">
             <div className="absolute inset-0 rounded-full bg-ocean-blue/10 blur-3xl" />
             <img
               src={ctaImage}
