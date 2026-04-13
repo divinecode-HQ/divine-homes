@@ -76,19 +76,20 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         </div>
 
         <div className="shrink-0 text-right">
-          <div className="flex items-center justify-end gap-1 text-gold">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <Icon key={index} icon="mdi:star" className="text-base" />
-            ))}
+          <div className="flex items-center justify-end gap-1 text-sm font-semibold text-gold">
+            <span>5.0</span>
+            <Icon icon="mdi:star" className="text-base" />
           </div>
 
           <a
             href={testimonial.reviewUrl}
             target="_blank"
             rel="noreferrer"
-            className="mt-3 inline-block text-sm font-medium text-ocean-blue underline decoration-ocean-blue/75 underline-offset-3 transition hover:text-charcoal"
+            title="View original review"
+            aria-label="View original review"
+            className="mt-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-ocean-blue/10 text-ocean-blue transition hover:bg-ocean-blue/16 hover:text-charcoal"
           >
-            View original review
+            <Icon icon="mdi:open-in-new" className="text-lg" />
           </a>
         </div>
       </div>

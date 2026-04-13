@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import AboutSection from '../components/sections/AboutSection'
+import CtaSection from '../components/sections/CtaSection'
 import HeroSection from '../components/sections/HeroSection'
 import ProjectsSection from '../components/sections/ProjectsSection'
 import ServicesSection from '../components/sections/ServicesSection'
@@ -26,6 +27,7 @@ function LandingPage() {
       <AboutSection />
       <ProjectsSection />
       <TestimonialsSection />
+      <CtaSection />
     </>
   )
 }

@@ -2,8 +2,18 @@ import { Icon } from '@iconify/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import projectImageOne from '../../assets/images/divine-homes-modern-building-construction.jpg'
-import projectImageTwo from '../../assets/images/hero-section.png'
+import contemporaryMinimalistVillaConstruction from '../../assets/images/contemporary-minimalist-villa-in-construction.png'
+import contemporaryMinimalistVillaSideView from '../../assets/images/contemporary-minimalist-villa-side-view.png'
+import contemporaryMinimalistVilla from '../../assets/images/contemporary-minimalist-villa.png'
+import duplexMansion from '../../assets/images/duplex-mansion.png'
+import duplex from '../../assets/images/duplex.jpg'
+import elevationModernVillaConstruction from '../../assets/images/elevation-modern-villa-in-construction.png'
+import elevationModernVillaSideView from '../../assets/images/elevation-modern-villa-side-view.png'
+import elevationModernVilla from '../../assets/images/elevation-modern-villa.png'
+import modernDuplex from '../../assets/images/modern-duplex.png'
+import modernMinimalistMansionConstruction from '../../assets/images/modern-minimalist-mansion-in-construction.png'
+import modernMinimalistMansionSideView from '../../assets/images/modern-minimalist-mansion-side-view.png'
+import modernMinimalistMansion from '../../assets/images/modern-minimalist-mansion.png'
 
 type Project = {
   description?: string
@@ -17,25 +27,41 @@ const projects: Project[] = [
     title: 'Luxury Residential Building',
     description:
       'A refined residence delivered with premium finishing and careful structural detailing.',
-    images: [projectImageOne, projectImageTwo, projectImageOne],
+    images: [
+      elevationModernVilla,
+      elevationModernVillaSideView,
+      elevationModernVillaConstruction,
+    ],
   },
   {
     title: 'Modern House Renovation',
     description:
       'A full renovation project designed to improve comfort, value, and visual appeal.',
-    images: [projectImageTwo, projectImageOne, projectImageTwo],
+    images: [
+      contemporaryMinimalistVilla,
+      contemporaryMinimalistVillaSideView,
+      contemporaryMinimalistVillaConstruction,
+    ],
   },
   {
     title: 'Contemporary Family Home',
     description:
       'A clean, modern build executed with durable materials and coordinated site delivery.',
-    images: [projectImageOne, projectImageTwo, projectImageOne],
+    images: [
+      modernMinimalistMansion,
+      modernMinimalistMansionSideView,
+      modernMinimalistMansionConstruction,
+    ],
   },
   {
     title: 'Premium Interior Upgrade',
     description:
       'A carefully managed upgrade focused on stronger function, cleaner finishes, and a brighter interior.',
-    images: [projectImageTwo, projectImageOne, projectImageTwo],
+    images: [
+      duplexMansion,
+      modernDuplex,
+      duplex,
+    ],
   },
   {
     title: 'View More',
