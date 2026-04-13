@@ -79,7 +79,7 @@ function MoreProjectCard() {
     <motion.article
       whileHover={{ y: -4, scale: 1.03 }}
       transition={{ duration: 0.32, ease: 'easeOut' }}
-      className="flex min-h-[28rem] items-center justify-center rounded-[20px] bg-grey/14 p-6"
+      className="flex min-h-112 items-center justify-center rounded-[20px] bg-grey/14 p-6"
     >
       <Link
         to="/projects"
@@ -189,7 +189,7 @@ function ProjectCard({ project }: ProjectCardProps) {
       transition={{ duration: 0.32, ease: 'easeOut' }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative min-h-[28rem] overflow-hidden rounded-[20px]"
+      className="group relative min-h-112 overflow-hidden rounded-[20px]"
     >
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
@@ -210,7 +210,7 @@ function ProjectCard({ project }: ProjectCardProps) {
       <div className="absolute inset-0 bg-black/6 transition-colors duration-300 group-hover:bg-black/14" />
 
       <div className="absolute inset-x-0 bottom-0 px-6 pt-6 pb-10 sm:px-7 sm:pt-7 sm:pb-11">
-        <div className="translate-y-[3.75rem] text-white transition-transform duration-300 ease-out group-hover:translate-y-4">
+        <div className="translate-y-15 text-white transition-transform duration-300 ease-out group-hover:translate-y-4">
           <h3 className="font-space text-2xl font-bold">{project.title}</h3>
 
           <p className="mt-3 max-w-sm text-sm leading-6 text-white/76">
@@ -328,7 +328,7 @@ function ProjectsSection() {
               <div
                 key={project.title}
                 data-project-card
-                className="w-[88%] min-w-[88%] snap-center sm:w-[72%] sm:min-w-[72%] lg:w-[22rem] lg:min-w-[22rem] xl:w-[24rem] xl:min-w-[24rem]"
+                className="w-[88%] min-w-[88%] snap-center sm:w-[72%] sm:min-w-[72%] lg:w-88 lg:min-w-88 xl:w-[24rem] xl:min-w-[24rem]"
               >
                 <ProjectCard project={project} />
               </div>

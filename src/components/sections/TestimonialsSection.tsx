@@ -102,7 +102,7 @@ function TestimonialsSection() {
   const mobileExtraTestimonials = testimonials.slice(2)
 
   return (
-    <section className="bg-[color:rgba(76,132,166,0.06)] py-18 sm:py-22 lg:py-24">
+    <section className="bg-[rgba(76,132,166,0.06)] py-18 sm:py-22 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
