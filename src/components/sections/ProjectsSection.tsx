@@ -223,6 +223,8 @@ function ProjectCard({ project }: ProjectCardProps) {
             key={activeImage}
             src={project.images?.[activeImage]}
             alt={`${project.title} view ${activeImage + 1}`}
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, x: 24, scale: 1.02 }}
             animate={{ opacity: 1, x: 0, scale: isHovered ? 1.06 : 1 }}
             exit={{ opacity: 0, x: -24, scale: 1.04 }}

@@ -127,6 +127,8 @@ function AboutSection() {
                   <img
                     src={aboutImage}
                     alt="Divine Homes construction team on site"
+                    loading="lazy"
+                    decoding="async"
                     className="h-full min-h-95 w-full object-cover"
                   />
                 </div>

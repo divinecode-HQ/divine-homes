@@ -5,9 +5,14 @@ import Button from '../Button'
 function HeroSection() {
   return (
     <section className="relative -mt-19.25 overflow-hidden px-6 pt-32 pb-44 sm:px-8 sm:pb-48 lg:px-10 lg:pb-36">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+      <img
+        src={heroImage}
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-white/10 backdrop-blur-xs" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,252,0.18),rgba(24,39,75,0.24))]" />
