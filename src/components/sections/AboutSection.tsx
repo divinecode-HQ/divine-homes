@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'
-import aboutImage from '../../assets/images/divine-homes-modern-building-construction.jpg'
+import aboutImage from '../../assets/images/optimized/divine-homes-modern-building-construction.jpg'
 
 const trustPoints = [
   {

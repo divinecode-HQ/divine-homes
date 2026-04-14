@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import ctaImage from '../../assets/images/construction-manager.png'
+import ctaImage from '../../assets/images/optimized/construction-manager.png'
 import Button from '../Button'
 
 function CtaSection() {

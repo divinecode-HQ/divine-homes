@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import heroImage from '../../assets/images/hero-section.png'
+import heroImage from '../../assets/images/optimized/hero-section.png'
 import Button from '../Button'
 
 function HeroSection() {
