@@ -245,11 +245,19 @@ function ProjectCard({ project }: ProjectCardProps) {
             {project.description}
           </p>
 
-          <div className="mt-4">
+          <div className="mt-4 flex items-center justify-between gap-3">
             <ImageIndicators activeImage={activeImage} onSelect={handleDotSelect} />
+
+            <Link
+              to="/projects"
+              aria-label={`View ${project.title}`}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/24 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal md:hidden"
+            >
+              <Icon icon="mdi:arrow-top-right" className="text-lg" />
+            </Link>
           </div>
 
-          <div className="pointer-events-none mt-3 translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+          <div className="pointer-events-none mt-3 hidden translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 md:block">
 
             <Link
               to="/projects"
