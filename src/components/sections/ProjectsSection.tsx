@@ -14,6 +14,7 @@ import modernDuplex from '../../assets/images/optimized/modern-duplex.png'
 import modernMinimalistMansionConstruction from '../../assets/images/optimized/modern-minimalist-mansion-in-construction.png'
 import modernMinimalistMansionSideView from '../../assets/images/optimized/modern-minimalist-mansion-side-view.png'
 import modernMinimalistMansion from '../../assets/images/optimized/modern-minimalist-mansion.png'
+import { projects } from '../../data/projects'
 
 type Project = {
   description?: string
@@ -21,53 +22,6 @@ type Project = {
   isMoreCard?: boolean
   title: string
 }
-
-const projects: Project[] = [
-  {
-    title: 'Luxury Residential Building',
-    description:
-      'A refined residence delivered with premium finishing and careful structural detailing.',
-    images: [
-      elevationModernVilla,
-      elevationModernVillaSideView,
-      elevationModernVillaConstruction,
-    ],
-  },
-  {
-    title: 'Modern House Renovation',
-    description:
-      'A full renovation project designed to improve comfort, value, and visual appeal.',
-    images: [
-      contemporaryMinimalistVilla,
-      contemporaryMinimalistVillaSideView,
-      contemporaryMinimalistVillaConstruction,
-    ],
-  },
-  {
-    title: 'Contemporary Family Home',
-    description:
-      'A clean, modern build executed with durable materials and coordinated site delivery.',
-    images: [
-      modernMinimalistMansion,
-      modernMinimalistMansionSideView,
-      modernMinimalistMansionConstruction,
-    ],
-  },
-  {
-    title: 'Premium Interior Upgrade',
-    description:
-      'A carefully managed upgrade focused on stronger function, cleaner finishes, and a brighter interior.',
-    images: [
-      duplexMansion,
-      modernDuplex,
-      duplex,
-    ],
-  },
-  {
-    title: 'View More',
-    isMoreCard: true,
-  },
-]
 
 type ProjectCardProps = {
   isActive: boolean
