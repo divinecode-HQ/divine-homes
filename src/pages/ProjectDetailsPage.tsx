@@ -8,7 +8,7 @@ function ProjectDetailsPage() {
   const project = projects.find((p) => p.id === id)
   const [activeImage, setActiveImage] = useState<number>(0)
 
-  if (project) {
+  if (project === undefined) {
     return <div className="p-10 text-center">Project not found</div>
   }
 
