@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { projects } from '../../data/projects'
+import { projects, type Project } from '../../data/projects'
 
 type ProjectCardProps = {
   isActive: boolean
