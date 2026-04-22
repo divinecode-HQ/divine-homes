@@ -4,14 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects'
 
-type Project = {
-  id: string
-  title: string
-  description?: string
-  images?: string[]
-  isMoreCard?: boolean
-}
-
 type ProjectCardProps = {
   isActive: boolean
   project: Project
