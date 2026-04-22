@@ -24,6 +24,7 @@ export type Project = {
   services: string[]
   location: string
   status: 'Completed' | 'Ongoing'
+  isMoreCard: boolean 
 }
 
 export const projects: Project[] = [
@@ -97,5 +98,16 @@ export const projects: Project[] = [
     services: ['Construction', 'Interior Finishing', 'Project Management'],
     location: 'Lekki, Nigeria',
     status: 'Ongoing',
+  },
+  {
+  id: 'view-more',
+  title: 'View More',
+  description: 'Explore all our completed and ongoing projects.',
+  images: [], // empty is fine
+  category: '',
+  services: [],
+  location: '',
+  status: 'Completed',
+  isMoreCard: true
   },
 ]
