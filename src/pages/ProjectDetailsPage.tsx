@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { projects, type Project } from '../data/projects'
 
 function ProjectDetailsPage() {
-  const { slug } = useParams<{ slug: string }>()
+  const { id } = useParams<{ id: string }>()
 
-  const project = projects.find((p: Project) => p.slug === slug)
+  const project = projects.find((p: Project) => p.id === id)
 
   const [activeImage, setActiveImage] = useState<number>(0)
 
