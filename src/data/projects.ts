@@ -24,7 +24,7 @@ export type Project = {
   services: string[]
   location: string
   status: 'Completed' | 'Ongoing'
-  isMoreCard: boolean 
+  isMoreCard?: boolean 
 }
 
 export const projects: Project[] = [
