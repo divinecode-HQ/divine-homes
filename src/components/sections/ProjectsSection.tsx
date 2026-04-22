@@ -2,19 +2,15 @@ import { Icon } from '@iconify/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import contemporaryMinimalistVillaConstruction from '../../assets/images/optimized/contemporary-minimalist-villa-in-construction.png'
-import contemporaryMinimalistVillaSideView from '../../assets/images/optimized/contemporary-minimalist-villa-side-view.png'
-import contemporaryMinimalistVilla from '../../assets/images/optimized/contemporary-minimalist-villa.png'
-import duplexMansion from '../../assets/images/optimized/duplex-mansion.png'
-import duplex from '../../assets/images/optimized/duplex.jpg'
-import elevationModernVillaConstruction from '../../assets/images/optimized/elevation-modern-villa-in-construction.png'
-import elevationModernVillaSideView from '../../assets/images/optimized/elevation-modern-villa-side-view.png'
-import elevationModernVilla from '../../assets/images/optimized/elevation-modern-villa.png'
-import modernDuplex from '../../assets/images/optimized/modern-duplex.png'
-import modernMinimalistMansionConstruction from '../../assets/images/optimized/modern-minimalist-mansion-in-construction.png'
-import modernMinimalistMansionSideView from '../../assets/images/optimized/modern-minimalist-mansion-side-view.png'
-import modernMinimalistMansion from '../../assets/images/optimized/modern-minimalist-mansion.png'
 import { projects } from '../../data/projects'
+
+type Project = {
+  id: string
+  title: string
+  description?: string
+  images?: string[]
+  isMoreCard?: boolean
+}
 
 type ProjectCardProps = {
   isActive: boolean
