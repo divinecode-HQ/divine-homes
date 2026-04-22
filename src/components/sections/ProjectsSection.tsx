@@ -183,7 +183,7 @@ function ProjectCard({ project, isActive }: ProjectCardProps) {
         <AnimatePresence mode="wait">
           <motion.img
             key={activeImage}
-            src={project.images?.[activeImage]}
+            src={project.images[activeImage]}
             alt={`${project.title} view ${activeImage + 1}`}
             loading="lazy"
             decoding="async"
