@@ -1,18 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { projects } from '../data/projects'
-
-type Project = {
-  slug: string
-  title: string
-  description: string
-  fullDescription?: string
-  images: string[]
-  category: string
-  status: string
-  location: string
-  services: string[]
-}
+import { projects, type Project } from '../data/projects'
 
 function ProjectDetailsPage() {
   const { slug } = useParams<{ slug: string }>()
