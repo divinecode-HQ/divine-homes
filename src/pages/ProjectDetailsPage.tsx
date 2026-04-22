@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { projects, type Project } from '../data/projects'
+import { projects } from '../data/projects'
 
 function ProjectDetailsPage() {
   const { id } = useParams()
