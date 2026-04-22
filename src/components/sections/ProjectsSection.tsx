@@ -230,7 +230,7 @@ function ProjectCard({ project, isActive }: ProjectCardProps) {
             <ImageIndicators activeImage={activeImage} onSelect={handleDotSelect} />
 
             <Link
-              to="/projects"
+              to="/projects/${project.id}"
               aria-label={`View ${project.title}`}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/24 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal md:hidden"
             >
@@ -241,7 +241,7 @@ function ProjectCard({ project, isActive }: ProjectCardProps) {
           <div className="pointer-events-none mt-3 hidden translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 md:block">
 
             <Link
-              to="/projects"
+              to="/projects/${project.id}"
               className="mt-2 inline-flex items-center justify-center rounded-md border border-white/28 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal"
             >
               View Project
