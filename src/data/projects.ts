@@ -24,7 +24,20 @@ export type Project = {
   services: string[]
   location: string
   status: 'Completed' | 'Ongoing'
-  isMoreCard?: boolean 
+
+  // NEW FIELDS
+  duration?: string
+  yearCompleted?: number
+
+  metrics?: {
+    beds?: number
+    baths?: number
+    size?: string
+    kitchen?: number
+    dining?: number
+  }
+
+  isMoreCard?: boolean
 }
 
 export const projects: Project[] = [
@@ -44,6 +57,16 @@ export const projects: Project[] = [
     services: ['Construction', 'Roofing', 'Finishing'],
     location: 'Lagos, Nigeria',
     status: 'Completed',
+
+    duration: '6 months',
+    yearCompleted: 2025,
+    metrics: {
+      beds: 5,
+      baths: 4,
+      size: '450 sqm',
+      kitchen: 1,
+      dining: 1,
+    },
   },
 
   {
@@ -62,6 +85,16 @@ export const projects: Project[] = [
     services: ['Rewiring', 'Painting', 'Interior Finishing'],
     location: 'Abuja, Nigeria',
     status: 'Completed',
+
+    duration: '3 months',
+    yearCompleted: 2024,
+    metrics: {
+      beds: 4,
+      baths: 3,
+      size: '320 sqm',
+      kitchen: 1,
+      dining: 1,
+    },
   },
 
   {
@@ -80,6 +113,16 @@ export const projects: Project[] = [
     services: ['Construction', 'Wiring', 'Roofing', 'Finishing'],
     location: 'Ibadan, Nigeria',
     status: 'Completed',
+
+    duration: '5 months',
+    yearCompleted: 2025,
+    metrics: {
+      beds: 4,
+      baths: 4,
+      size: '380 sqm',
+      kitchen: 1,
+      dining: 1,
+    },
   },
 
   {
@@ -98,16 +141,27 @@ export const projects: Project[] = [
     services: ['Construction', 'Interior Finishing', 'Project Management'],
     location: 'Lekki, Nigeria',
     status: 'Ongoing',
+
+    duration: '8 months (ongoing)',
+    yearCompleted: 2026,
+    metrics: {
+      beds: 6,
+      baths: 7,
+      size: '650 sqm',
+      kitchen: 2,
+      dining: 2,
+    },
   },
+
   {
-  id: 'view-more',
-  title: 'View More',
-  description: 'Explore all our completed and ongoing projects.',
-  images: [], // empty is fine
-  category: '',
-  services: [],
-  location: '',
-  status: 'Completed',
-  isMoreCard: true
+    id: 'view-more',
+    title: 'View More',
+    description: 'Explore all our completed and ongoing projects.',
+    images: [],
+    category: '',
+    services: [],
+    location: '',
+    status: 'Completed',
+    isMoreCard: true,
   },
 ]
