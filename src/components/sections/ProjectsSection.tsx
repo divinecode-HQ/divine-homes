@@ -211,7 +211,7 @@ function ProjectCard({ project, isActive }: ProjectCardProps) {
             <ImageIndicators activeImage={activeImage} onSelect={handleDotSelect} />
 
             <Link                         
-              to="modern-villa-construction"
+              to="/projects/modern-villa-construction"
               aria-label={`View ${project.title}`}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/24 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-gold/45 focus:ring-offset-2 focus:ring-offset-charcoal md:hidden"
             >
