@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Icon } from '@iconify/react'
-import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
 
 function ProjectDetailsPage() {
