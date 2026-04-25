@@ -24,6 +24,32 @@ export type Project = {
   services: string[]
   location: string
   status: 'Completed' | 'Ongoing'
+  price?: string
+  downPayment?: string
+  
+  highlights?: {
+    type?: string
+    hoa?: string
+    buildingYear?: number
+    outside?: string
+    garden?: string
+    parking?: string
+  }
+
+  agent?: {
+    name: string
+    company: string
+    photo: string
+    license: string
+    phone: string
+  }
+
+  localInfo?: {
+    school?: string
+    crime?: string
+    noiseLevel?: 'Low' | 'Medium' | 'High'
+    environment?: string
+  }
 
   // NEW FIELDS
   duration?: string
@@ -57,7 +83,29 @@ export const projects: Project[] = [
     services: ['Construction', 'Roofing', 'Finishing'],
     location: 'Lagos, Nigeria',
     status: 'Completed',
-
+    price: '$1,13,200',
+    downPayment: '$20,216',
+    highlights: {
+      type: 'Townhomes',
+      hoa: 'No HOA Fee',
+      buildingYear: 2002,
+      outside: 'City View',
+      garden: 'Available',
+      parking: 'Available',
+    },
+    agent: {
+      name: 'Danial Doe',
+      company: 'Exquisite Properties, LLC | Alabama',
+      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      license: '#580573',
+      phone: '+000 1234 123 123',
+    },
+    localInfo: {
+      school: 'Excellent',
+      crime: 'Low',
+      noiseLevel: 'Medium',
+      environment: 'Green',
+    },
     duration: '6 months',
     yearCompleted: 2025,
     metrics: {
@@ -85,7 +133,29 @@ export const projects: Project[] = [
     services: ['Rewiring', 'Painting', 'Interior Finishing'],
     location: 'Abuja, Nigeria',
     status: 'Completed',
-
+    price: '$98,500',
+    downPayment: '$15,000',
+    highlights: {
+      type: 'Single Family',
+      hoa: 'None',
+      buildingYear: 2021,
+      outside: 'Garden View',
+      garden: 'Available',
+      parking: 'Available',
+    },
+    agent: {
+      name: 'Sarah Johnson',
+      company: 'Premier Realty | Abuja',
+      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      license: '#AB1234',
+      phone: '+234 801 234 5678',
+    },
+    localInfo: {
+      school: 'Good',
+      crime: 'Very Low',
+      noiseLevel: 'Low',
+      environment: 'Quiet',
+    },
     duration: '3 months',
     yearCompleted: 2024,
     metrics: {
@@ -113,7 +183,29 @@ export const projects: Project[] = [
     services: ['Construction', 'Wiring', 'Roofing', 'Finishing'],
     location: 'Ibadan, Nigeria',
     status: 'Completed',
-
+    price: '$85,000',
+    downPayment: '$12,500',
+    highlights: {
+      type: 'Duplex',
+      hoa: 'None',
+      buildingYear: 2023,
+      outside: 'Street View',
+      garden: 'N/A',
+      parking: 'Available',
+    },
+    agent: {
+      name: 'Michael Chen',
+      company: 'Metro Homes | Ibadan',
+      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      license: '#IB9876',
+      phone: '+234 902 345 6789',
+    },
+    localInfo: {
+      school: 'Average',
+      crime: 'Low',
+      noiseLevel: 'Medium',
+      environment: 'Urban',
+    },
     duration: '5 months',
     yearCompleted: 2025,
     metrics: {
@@ -141,7 +233,29 @@ export const projects: Project[] = [
     services: ['Construction', 'Interior Finishing', 'Project Management'],
     location: 'Lekki, Nigeria',
     status: 'Ongoing',
-
+    price: '$250,000',
+    downPayment: '$50,000',
+    highlights: {
+      type: 'Luxury Mansion',
+      hoa: 'Required',
+      buildingYear: 2026,
+      outside: 'Ocean View',
+      garden: 'Planned',
+      parking: '4 Spaces',
+    },
+    agent: {
+      name: 'Victoria Azuka',
+      company: 'Luxe Estates | Lekki',
+      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      license: '#LK5566',
+      phone: '+234 701 987 6543',
+    },
+    localInfo: {
+      school: 'Excellent',
+      crime: 'Very Low',
+      noiseLevel: 'Low',
+      environment: 'Private',
+    },
     duration: '8 months (ongoing)',
     yearCompleted: 2026,
     metrics: {
