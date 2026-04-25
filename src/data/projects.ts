@@ -13,6 +13,7 @@ import elevationModernVilla from '../assets/images/optimized/elevation-modern-vi
 import modernMinimalistMansionConstruction from '../assets/images/optimized/modern-minimalist-mansion-in-construction.png'
 import modernMinimalistMansionSideView from '../assets/images/optimized/modern-minimalist-mansion-side-view.png'
 import modernMinimalistMansion from '../assets/images/optimized/modern-minimalist-mansion.png'
+import agentPlaceholder from '../assets/images/optimized/agent-placeholder.png'
 
 export type Project = {
   id: string
@@ -96,7 +97,7 @@ export const projects: Project[] = [
     agent: {
       name: 'Danial Doe',
       company: 'Exquisite Properties, LLC | Alabama',
-      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      photo: agentPlaceholder,
       license: '#580573',
       phone: '+000 1234 123 123',
     },
@@ -146,7 +147,7 @@ export const projects: Project[] = [
     agent: {
       name: 'Sarah Johnson',
       company: 'Premier Realty | Abuja',
-      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      photo: agentPlaceholder,
       license: '#AB1234',
       phone: '+234 801 234 5678',
     },
@@ -196,7 +197,7 @@ export const projects: Project[] = [
     agent: {
       name: 'Michael Chen',
       company: 'Metro Homes | Ibadan',
-      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      photo: agentPlaceholder,
       license: '#IB9876',
       phone: '+234 902 345 6789',
     },
@@ -246,7 +247,7 @@ export const projects: Project[] = [
     agent: {
       name: 'Victoria Azuka',
       company: 'Luxe Estates | Lekki',
-      photo: '/src/assets/images/optimized/agent-placeholder.png',
+      photo: agentPlaceholder,
       license: '#LK5566',
       phone: '+234 701 987 6543',
     },

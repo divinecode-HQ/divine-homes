@@ -3,6 +3,13 @@ import { useState } from 'react'
 import { Icon } from '@iconify/react'
 import { projects } from '../data/projects'
 
+// Import images for Local Information section
+import schoolImg from '../assets/images/optimized/elevation-modern-villa.png'
+import crimeImg from '../assets/images/optimized/contemporary-minimalist-villa.png'
+import noiseImg from '../assets/images/optimized/modern-duplex.png'
+import envImg from '../assets/images/optimized/duplex-mansion.png'
+import agentPlaceholder from '../assets/images/optimized/agent-placeholder.png'
+
 function ProjectDetailsPage() {
   const { id } = useParams()
   const project = projects.find((p) => p.id === id)
@@ -272,16 +279,16 @@ function ProjectDetailsPage() {
                     </p>
                   </div>
                   
-                  {/* Real iframe - only visible if API key is provided */}
-                  <iframe
-                    title="location map"
-                    src={`https://www.google.com/maps/embed/v1/place?key=REPLACE_WITH_YOUR_KEY&q=${encodeURIComponent(
-                      project.location
-                    )}`}
-                    className="w-full h-full border-0 opacity-0 group-hover:opacity-10 transition-opacity"
-                    allowFullScreen
-                  ></iframe>
-                </div>
+                  {/* Real iframe - uses a standard embed URL that doesn't require an API key for basic display */}
+                   <iframe
+                     title="location map"
+                     src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                       project.location
+                     )}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
+                     className="w-full h-full border-0"
+                     allowFullScreen
+                   ></iframe>
+                 </div>
               </div>
             </div>
 
@@ -290,10 +297,10 @@ function ProjectDetailsPage() {
               <h3 className="text-2xl font-black text-gray-900 mb-6">Local Information</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
-                  { label: 'School', value: project.localInfo?.school || 'N/A', icon: 'mdi:school', img: '/src/assets/images/optimized/elevation-modern-villa.png' },
-                  { label: 'Crime', value: project.localInfo?.crime || 'N/A', icon: 'mdi:gavel', img: '/src/assets/images/optimized/contemporary-minimalist-villa.png' },
-                  { label: 'Noise Level', value: project.localInfo?.noiseLevel || 'N/A', icon: 'mdi:megaphone', img: '/src/assets/images/optimized/modern-duplex.png' },
-                  { label: 'Environment', value: project.localInfo?.environment || 'N/A', icon: 'mdi:tree', img: '/src/assets/images/optimized/duplex-mansion.png' },
+                  { label: 'School', value: project.localInfo?.school || 'N/A', icon: 'mdi:school', img: schoolImg },
+                  { label: 'Crime', value: project.localInfo?.crime || 'N/A', icon: 'mdi:gavel', img: crimeImg },
+                  { label: 'Noise Level', value: project.localInfo?.noiseLevel || 'N/A', icon: 'mdi:megaphone', img: noiseImg },
+                  { label: 'Environment', value: project.localInfo?.environment || 'N/A', icon: 'mdi:tree', img: envImg },
                 ].map((item) => (
                   <div key={item.label} className="group cursor-pointer">
                     <div className="relative h-28 w-full rounded-2xl overflow-hidden mb-3 shadow-md border border-gray-100">
@@ -357,7 +364,7 @@ function ProjectDetailsPage() {
                 <div className="flex items-center gap-5 mb-8 p-1">
                   <div className="relative">
                     <img
-                      src={project.agent?.photo || '/src/assets/images/optimized/agent-placeholder.png'}
+                      src={project.agent?.photo || agentPlaceholder}
                       alt="Agent"
                       className="w-20 h-20 rounded-2xl object-cover shadow-md border-2 border-white"
                     />
