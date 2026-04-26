@@ -3,18 +3,11 @@ import { useState } from 'react'
 import { Icon } from '@iconify/react'
 import { projects } from '../data/projects'
 
-import schoolImg from '../assets/images/optimized/elevation-modern-villa.png'
-import crimeImg from '../assets/images/optimized/contemporary-minimalist-villa.png'
-import noiseImg from '../assets/images/optimized/modern-duplex.png'
-import envImg from '../assets/images/optimized/duplex-mansion.png'
-import agentPlaceholder from '../assets/images/optimized/agent-placeholder.png'
-
 function ProjectDetailsPage() {
   const { id } = useParams()
   const project = projects.find((p) => p.id === id)
 
   const [activeImage, setActiveImage] = useState(0)
-  const [activeLocationTab, setActiveLocationTab] = useState('Map')
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
 
   if (!project) {
