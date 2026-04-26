@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Icon } from '@iconify/react'
-import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
 
 function ProjectDetailsPage() {
@@ -9,7 +8,7 @@ function ProjectDetailsPage() {
   const project = projects.find((p) => p.id === id)
 
   const [activeImage, setActiveImage] = useState(0)
-  const [contactMethod, setContactMethod] = useState('Email')
+  const [isExpanded, setIsExpanded] = useState(false)
 
   if (!project) {
     return <div className="p-10 text-center">Project not found</div>
@@ -17,56 +16,52 @@ function ProjectDetailsPage() {
 
   const isCompleted = project.status === 'Completed'
 
-  const relatedProjects = projects.filter(
-    (p) =>
-      p.id !== project.id &&
-      p.category === project.category &&
-      p.status === project.status
-  )
-
-  const handleShare = () => {
-    navigator.share?.({
-      title: project.title,
-      url: window.location.href,
-    })
-  }
-
   return (
-    <section className="bg-gray-50 py-10 px-6 lg:px-10">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-gray-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 py-8">
 
         {/* BACK */}
         <Link
           to="/projects"
-          className="flex items-center gap-1 text-sm text-gray-500 hover:text-black"
+          className="flex items-center text-sm font-medium text-teal-600 mb-6"
         >
-          <Icon icon="mdi:chevron-left" />
-          Back to Project Page
+          <Icon icon="mdi:chevron-left" className="text-xl" />
+          Back to Projects
         </Link>
 
         {/* HEADER */}
-        <div className="mt-4 flex items-center justify-between gap-4">
-          <h1 className="text-2xl sm:text-3xl font-bold max-w-[70%]">
-            {project.title}
-          </h1>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-3xl font-bold text-gray-900">
+                {project.title}
+              </h1>
 
-          <button onClick={handleShare}>
-            <Icon icon="mdi:share-variant" className="text-xl" />
-          </button>
+              {/* STATUS BADGE */}
+              <span
+                className={`px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider ${
+                  isCompleted
+                    ? 'bg-green-500 text-white'
+                    : 'bg-orange-500 text-white animate-pulse'
+                }`}
+              >
+                {project.status}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 text-gray-500 mt-2">
+              <Icon icon="mdi:map-marker" />
+              <span className="text-sm font-medium">{project.location}</span>
+            </div>
+          </div>
         </div>
 
-        {/* LOCATION */}
-        <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
-          <Icon icon="mdi:map-marker" />
-          {project.location}
-        </div>
-
-        {/* IMAGE SECTION */}
-        <div className="mt-6 grid lg:grid-cols-4 gap-4">
-          <div className="lg:col-span-3 relative rounded-xl overflow-hidden">
+        {/* IMAGE GALLERY */}
+        <div className="grid lg:grid-cols-4 gap-4 mb-10">
+          <div className="lg:col-span-3 relative rounded-2xl overflow-hidden">
             <img
               src={project.images[activeImage]}
-              className="w-full h-[420px] object-cover"
+              className="w-full h-[500px] object-cover"
             />
 
             {/* ARROWS */}
@@ -94,13 +89,13 @@ function ProjectDetailsPage() {
           </div>
 
           {/* THUMBNAILS */}
-          <div className="flex lg:flex-col gap-3 overflow-x-auto">
+          <div className="flex lg:flex-col gap-3">
             {project.images.map((img, i) => (
               <button
                 key={i}
                 onClick={() => setActiveImage(i)}
-                className={`w-24 h-20 rounded-lg overflow-hidden border ${
-                  activeImage === i ? 'border-gold' : 'border-transparent'
+                className={`h-24 rounded-lg overflow-hidden border ${
+                  activeImage === i ? 'border-teal-600' : 'border-transparent'
                 }`}
               >
                 <img src={img} className="w-full h-full object-cover" />
@@ -110,37 +105,21 @@ function ProjectDetailsPage() {
         </div>
 
         {/* MAIN GRID */}
-        <div className="mt-10 grid lg:grid-cols-3 gap-10">
+        <div className="grid lg:grid-cols-3 gap-10">
 
           {/* LEFT */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-10">
 
-            {/* STATUS SUMMARY */}
+            {/* SUMMARY */}
             <div className="bg-white p-6 rounded-xl border">
-              <div className="flex items-center gap-6 flex-wrap">
+              <div className="flex flex-wrap gap-6 text-sm">
 
-                {/* STATUS */}
-                <div className="flex items-center gap-2">
-                  {isCompleted ? (
-                    <span className="h-3 w-3 rounded-full bg-green-500" />
-                  ) : (
-                    <motion.span
-                      className="h-3 w-3 rounded-full bg-red-500"
-                      animate={{ scale: [1, 1.5, 1] }}
-                      transition={{ repeat: Infinity, duration: 1 }}
-                    />
-                  )}
-                  <span className="font-semibold">{project.status}</span>
-                </div>
-
-                {/* DURATION */}
                 <div className="font-semibold">
                   {isCompleted
                     ? `Completed in ${project.duration}`
-                    : `${project.duration} till completion`}
+                    : `${project.duration}`}
                 </div>
 
-                {/* YEAR */}
                 <div className="text-gray-500">
                   {project.yearCompleted}
                 </div>
@@ -151,14 +130,14 @@ function ProjectDetailsPage() {
                 {project.metrics?.beds && (
                   <div className="flex items-center gap-2">
                     <Icon icon="mdi:bed" />
-                    {project.metrics.beds} Bedrooms
+                    {project.metrics.beds} Beds
                   </div>
                 )}
 
                 {project.metrics?.baths && (
                   <div className="flex items-center gap-2">
-                    <Icon icon="mdi:bath" />
-                    {project.metrics.baths} Bathrooms
+                    <Icon icon="mdi:shower" />
+                    {project.metrics.baths} Baths
                   </div>
                 )}
 
@@ -179,124 +158,67 @@ function ProjectDetailsPage() {
             </div>
 
             {/* OVERVIEW */}
-            <div className="mt-8">
+            <div>
               <h3 className="text-lg font-semibold">Overview</h3>
               <p className="mt-3 text-gray-600 leading-relaxed">
-                {project.fullDescription || project.description}
+                {isExpanded
+                  ? project.fullDescription || project.description
+                  : (project.fullDescription || project.description).slice(0, 150) + '...'}
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="ml-2 text-teal-600 font-semibold"
+                >
+                  {isExpanded ? 'Read Less' : 'Read More'}
+                </button>
               </p>
             </div>
 
-            {/* SCOPE */}
-            <div className="mt-10">
-              <h3 className="text-lg font-semibold">Scope of Projects</h3>
+            {/* SERVICES */}
+            <div>
+              <h3 className="text-lg font-semibold mb-3">
+                Services Rendered
+              </h3>
 
-              <div className="grid sm:grid-cols-2 gap-4 mt-4 text-sm">
-                <p><strong>Category:</strong> {project.category}</p>
-                <p><strong>Year Completed:</strong> {project.yearCompleted}</p>
-              </div>
-
-              {/* SERVICES */}
-              <div className="mt-6">
-                <h4 className="font-semibold mb-3">
-                  Services Rendered
-                </h4>
-
-                <ul className="space-y-2">
-                  {project.services.map((s, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                      <Icon icon="mdi:check-circle-outline" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul className="space-y-2">
+                {project.services.map((s, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <Icon icon="mdi:check-circle-outline" />
+                    {s}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* LOCATION */}
-            <div className="mt-10">
-              <h3 className="text-lg font-semibold">
-                Location
-              </h3>
-
-              <div className="flex items-center gap-2 mt-3 text-gold">
+            <div>
+              <h3 className="text-lg font-semibold">Location</h3>
+              <div className="flex items-center gap-2 mt-2 text-teal-600">
                 <Icon icon="mdi:map-marker" />
                 {project.location}
               </div>
             </div>
-
-            {/* RELATED */}
-            {relatedProjects.length > 0 && (
-              <div className="mt-12">
-                <h3 className="text-lg font-semibold mb-6">
-                  Related Projects
-                </h3>
-
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {relatedProjects.map((p) => (
-                    <Link
-                      key={p.id}
-                      to={`/projects/${p.id}`}
-                      className="block border rounded-lg overflow-hidden"
-                    >
-                      <img
-                        src={p.images[0]}
-                        className="h-40 w-full object-cover"
-                      />
-                      <div className="p-3">
-                        <h4 className="font-semibold text-sm">
-                          {p.title}
-                        </h4>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* RIGHT CARD */}
-          <div className="lg:sticky lg:top-24 h-fit bg-white p-6 rounded-xl border">
-            <h3 className="font-semibold text-lg mb-4">
-              Book a Meeting
+          {/* RIGHT - YOUR CUSTOM CARD */}
+          <div className="bg-white p-6 rounded-xl border h-fit sticky top-24">
+            <h3 className="text-lg font-semibold mb-4">
+              Start Your Project
             </h3>
 
-            <form className="space-y-4">
-              <input placeholder="Name" className="w-full border p-2 rounded" />
-              <input placeholder="Email" className="w-full border p-2 rounded" />
-              <input placeholder="Phone Number" className="w-full border p-2 rounded" />
+            <p className="text-sm text-gray-500 mb-6">
+              Ready to build something like this? Let’s bring your vision to life.
+            </p>
 
-              <div className="flex gap-3">
-                <input type="date" className="w-full border p-2 rounded" />
-                <input type="time" className="w-full border p-2 rounded" />
-              </div>
-
-              {/* CONTACT METHOD */}
-              <select
-                value={contactMethod}
-                onChange={(e) => setContactMethod(e.target.value)}
-                className="w-full border p-2 rounded"
-              >
-                <option>Email</option>
-                <option>Phone</option>
-                <option>WhatsApp</option>
-              </select>
-
-              {/* CONDITIONAL FIELD */}
-              {contactMethod === 'WhatsApp' && (
-                <input
-                  placeholder="WhatsApp Number"
-                  className="w-full border p-2 rounded"
-                />
-              )}
-
-              <button className="w-full bg-gold text-black py-3 rounded font-semibold">
-                Schedule Meeting
-              </button>
-            </form>
+            <Link
+              to="/#book-a-meeting"
+              className="block w-full text-center bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700"
+            >
+              Book a Meeting
+            </Link>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 
