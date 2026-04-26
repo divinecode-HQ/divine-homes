@@ -30,8 +30,8 @@ export type Project = {
   yearCompleted?: number
 
   metrics?: {
-    bedrooms?: number
-    rooms?: number
+    beds?: number
+    baths?: number
     kitchens?: number
     size?: string
   }
@@ -59,8 +59,8 @@ export const projects: Project[] = [
     duration: '6 months',
     yearCompleted: 2025,
     metrics: {
-      bedrooms: 5,
-      rooms: 8,
+      beds: 5,
+      baths: 6,
       kitchens: 1,
       size: '450 sqm',
     },
@@ -85,8 +85,8 @@ export const projects: Project[] = [
     duration: '3 months',
     yearCompleted: 2024,
     metrics: {
-      bedrooms: 4,
-      rooms: 6,
+      beds: 4,
+      baths: 3,
       kitchens: 1,
       size: '320 sqm',
     },
@@ -111,8 +111,8 @@ export const projects: Project[] = [
     duration: '5 months',
     yearCompleted: 2025,
     metrics: {
-      bedrooms: 4,
-      rooms: 7,
+      beds: 4,
+      baths: 5,
       kitchens: 1,
       size: '380 sqm',
     },
@@ -137,8 +137,8 @@ export const projects: Project[] = [
     duration: '2 months remaining',
     yearCompleted: 2026,
     metrics: {
-      bedrooms: 6,
-      rooms: 10,
+      beds: 6,
+      baths: 6,
       kitchens: 2,
       size: '650 sqm',
     },
