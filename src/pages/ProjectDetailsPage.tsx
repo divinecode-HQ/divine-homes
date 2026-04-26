@@ -148,17 +148,17 @@ function ProjectDetailsPage() {
 
               {/* METRICS */}
               <div className="flex gap-6 mt-6 text-sm flex-wrap">
-                {project.metrics?.bedrooms && (
+                {project.metrics?.beds && (
                   <div className="flex items-center gap-2">
                     <Icon icon="mdi:bed" />
-                    {project.metrics.bedrooms} Bedrooms
+                    {project.metrics.beds} Bedrooms
                   </div>
                 )}
 
-                {project.metrics?.rooms && (
+                {project.metrics?.baths && (
                   <div className="flex items-center gap-2">
-                    <Icon icon="mdi:floor-plan" />
-                    {project.metrics.rooms} Rooms
+                    <Icon icon="mdi:bath" />
+                    {project.metrics.baths} Bathrooms
                   </div>
                 )}
 
