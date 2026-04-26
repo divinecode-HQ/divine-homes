@@ -75,53 +75,73 @@ function ProjectDetailsPage() {
             </div>
           </div>
         </div>
+{/* IMAGE GALLERY (PREMIUM REFINED) */}
+<div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
+  
+  {/* MAIN IMAGE */}
+  <div className="lg:col-span-3 relative group rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+    <img
+      src={project.images[activeImage]}
+      alt={project.title}
+      className="w-full h-[550px] object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
+    />
 
-        {/* IMAGE GALLERY (UNCHANGED STRUCTURE) */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
-          <div className="lg:col-span-3 relative group rounded-3xl overflow-hidden shadow-lg border border-gray-100">
-            <img
-              src={project.images[activeImage]}
-              alt={project.title}
-              className="w-full h-[550px] object-cover"
-            />
+    {/* LEFT ARROW */}
+    <button
+      onClick={() =>
+        setActiveImage((prev) =>
+          prev === 0 ? project.images.length - 1 : prev - 1
+        )
+      }
+      className="absolute left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+    >
+      <Icon icon="mdi:chevron-left" className="text-2xl text-gray-800" />
+    </button>
 
-            <button
-              onClick={() =>
-                setActiveImage((prev) =>
-                  prev === 0 ? project.images.length - 1 : prev - 1
-                )
-              }
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100"
-            >
-              <Icon icon="mdi:chevron-left" className="text-2xl text-gray-800" />
-            </button>
+    {/* RIGHT ARROW */}
+    <button
+      onClick={() =>
+        setActiveImage((prev) =>
+          prev === project.images.length - 1 ? 0 : prev + 1
+        )
+      }
+      className="absolute right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+    >
+      <Icon icon="mdi:chevron-right" className="text-2xl text-gray-800" />
+    </button>
 
-            <button
-              onClick={() =>
-                setActiveImage((prev) =>
-                  prev === project.images.length - 1 ? 0 : prev + 1
-                )
-              }
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100"
-            >
-              <Icon icon="mdi:chevron-right" className="text-2xl text-gray-800" />
-            </button>
-          </div>
+    {/* IMAGE COUNT BADGE */}
+    <div className="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur">
+      {activeImage + 1} / {project.images.length}
+    </div>
+  </div>
 
-          <div className="hidden lg:flex flex-col gap-4">
-            {project.images.map((img, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveImage(i)}
-                className={`h-[172px] rounded-2xl overflow-hidden ${
-                  activeImage === i ? 'ring-4 ring-teal-500/30' : ''
-                }`}
-              >
-                <img src={img} className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div>
-        </div>
+  {/* THUMBNAILS */}
+  <div className="hidden lg:flex flex-col gap-3">
+    {project.images.map((img, i) => (
+      <button
+        key={i}
+        onClick={() => setActiveImage(i)}
+        className={`relative h-[170px] w-full rounded-2xl overflow-hidden transition-all duration-300 group
+          ${
+            activeImage === i
+              ? 'ring-2 ring-teal-500 scale-[0.98]'
+              : 'opacity-80 hover:opacity-100 hover:scale-[1.02]'
+          }`}
+      >
+        <img
+          src={img}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+
+        {/* ACTIVE OVERLAY */}
+        {activeImage === i && (
+          <div className="absolute inset-0 bg-teal-500/10 border-2 border-teal-500 rounded-2xl" />
+        )}
+      </button>
+    ))}
+  </div>
+</div>
 
         {/* CONTENT */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
