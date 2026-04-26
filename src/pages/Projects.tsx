@@ -145,11 +145,11 @@ function Projects() {
                         </span>
                       </div>
 
-                      {/* Hover Action */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      {/* Hover/Mobile Action */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 md:bg-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500">
                         <Link 
                           to={`/projects/${project.id}`}
-                          className="bg-white text-teal-900 px-8 py-3 rounded-2xl font-black text-sm shadow-xl hover:bg-teal-50 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-500"
+                          className="bg-white text-teal-900 px-8 py-3 rounded-2xl font-black text-sm shadow-xl hover:bg-teal-50 transition-all transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 duration-500"
                         >
                           View Project
                         </Link>
