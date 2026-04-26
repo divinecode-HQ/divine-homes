@@ -9,6 +9,7 @@ function ProjectDetailsPage() {
   const project = projects.find((p) => p.id === id)
 
   const [activeImage, setActiveImage] = useState(0)
+  const [contactMethod, setContactMethod] = useState('Email')
 
   if (!project) {
     return <div className="p-10 text-center">Project not found</div>
@@ -16,7 +17,6 @@ function ProjectDetailsPage() {
 
   const isCompleted = project.status === 'Completed'
 
-  // Related logic (improved)
   const relatedProjects = projects.filter(
     (p) =>
       p.id !== project.id &&
@@ -100,7 +100,7 @@ function ProjectDetailsPage() {
                 key={i}
                 onClick={() => setActiveImage(i)}
                 className={`w-24 h-20 rounded-lg overflow-hidden border ${
-                  activeImage === i ? 'border-gold' : ''
+                  activeImage === i ? 'border-gold' : 'border-transparent'
                 }`}
               >
                 <img src={img} className="w-full h-full object-cover" />
@@ -121,11 +121,15 @@ function ProjectDetailsPage() {
 
                 {/* STATUS */}
                 <div className="flex items-center gap-2">
-                  <span
-                    className={`h-3 w-3 rounded-full ${
-                      isCompleted ? 'bg-green-500' : 'bg-red-500'
-                    }`}
-                  />
+                  {isCompleted ? (
+                    <span className="h-3 w-3 rounded-full bg-green-500" />
+                  ) : (
+                    <motion.span
+                      className="h-3 w-3 rounded-full bg-red-500"
+                      animate={{ scale: [1, 1.5, 1] }}
+                      transition={{ repeat: Infinity, duration: 1 }}
+                    />
+                  )}
                   <span className="font-semibold">{project.status}</span>
                 </div>
 
@@ -133,7 +137,7 @@ function ProjectDetailsPage() {
                 <div className="font-semibold">
                   {isCompleted
                     ? `Completed in ${project.duration}`
-                    : `${project.duration} remaining`}
+                    : `${project.duration} till completion`}
                 </div>
 
                 {/* YEAR */}
@@ -144,7 +148,6 @@ function ProjectDetailsPage() {
 
               {/* METRICS */}
               <div className="flex gap-6 mt-6 text-sm flex-wrap">
-
                 {project.metrics?.bedrooms && (
                   <div className="flex items-center gap-2">
                     <Icon icon="mdi:bed" />
@@ -222,31 +225,33 @@ function ProjectDetailsPage() {
             </div>
 
             {/* RELATED */}
-            <div className="mt-12">
-              <h3 className="text-lg font-semibold mb-6">
-                Related Projects
-              </h3>
+            {relatedProjects.length > 0 && (
+              <div className="mt-12">
+                <h3 className="text-lg font-semibold mb-6">
+                  Related Projects
+                </h3>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {relatedProjects.map((p) => (
-                  <Link
-                    key={p.id}
-                    to={`/projects/${p.id}`}
-                    className="block border rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src={p.images[0]}
-                      className="h-40 w-full object-cover"
-                    />
-                    <div className="p-3">
-                      <h4 className="font-semibold text-sm">
-                        {p.title}
-                      </h4>
-                    </div>
-                  </Link>
-                ))}
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {relatedProjects.map((p) => (
+                    <Link
+                      key={p.id}
+                      to={`/projects/${p.id}`}
+                      className="block border rounded-lg overflow-hidden"
+                    >
+                      <img
+                        src={p.images[0]}
+                        className="h-40 w-full object-cover"
+                      />
+                      <div className="p-3">
+                        <h4 className="font-semibold text-sm">
+                          {p.title}
+                        </h4>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* RIGHT CARD */}
@@ -265,11 +270,24 @@ function ProjectDetailsPage() {
                 <input type="time" className="w-full border p-2 rounded" />
               </div>
 
-              <select className="w-full border p-2 rounded">
+              {/* CONTACT METHOD */}
+              <select
+                value={contactMethod}
+                onChange={(e) => setContactMethod(e.target.value)}
+                className="w-full border p-2 rounded"
+              >
                 <option>Email</option>
                 <option>Phone</option>
                 <option>WhatsApp</option>
               </select>
+
+              {/* CONDITIONAL FIELD */}
+              {contactMethod === 'WhatsApp' && (
+                <input
+                  placeholder="WhatsApp Number"
+                  className="w-full border p-2 rounded"
+                />
+              )}
 
               <button className="w-full bg-gold text-black py-3 rounded font-semibold">
                 Schedule Meeting
