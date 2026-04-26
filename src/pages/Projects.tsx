@@ -91,7 +91,7 @@ function Projects() {
             </div>
 
             {/* Search Bar */}
-            <div className="relative group min-w-[300px]">
+            <div className="relative group w-full lg:min-w-[350px] lg:w-auto">
               <Icon 
                 icon="mdi:magnify" 
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-teal-600 transition-colors text-xl" 
