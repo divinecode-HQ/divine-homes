@@ -275,9 +275,7 @@ function ProjectDetailsPage() {
 
           {/* RIGHT SIDE (UNCHANGED) */}
           <div></div>
-        </div>
       </div>
-    </div>
   )
 }
 
