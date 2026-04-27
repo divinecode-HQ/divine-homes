@@ -176,7 +176,7 @@ function ProjectDetailsPage() {
   </p>
 
   {/* METRICS (REPLACES BEDS/BATHS UI BUT CLEANED) */}
-  <div className="mt-8 flex items-center gap-8 pt-8 border-t border-gray-50">
+  <div className="mt-4 flex items-center gap-8 pt-8 border-t border-gray-50">
 
     <div className="flex items-center gap-2.5">
       <Icon icon="mdi:bed-outline" className="text-2xl text-gray-400" />
