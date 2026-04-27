@@ -163,7 +163,7 @@ function ProjectDetailsPage() {
   {/* CATEGORY (REPLACES PRICE) */}
   <div className="flex items-baseline gap-4 mt-3">
     <h2 className="text-5xl font-black text-gray-900 tracking-tight">
-      {project.category}
+      {project.duration}
     </h2>
   </div>
 
