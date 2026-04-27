@@ -142,25 +142,65 @@ function ProjectDetailsPage() {
     ))}
   </div>
 </div>
+{/* PROJECT META (TRANSFORMED FROM PRICE UI) */}
+<div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
 
-        {/* CONTENT */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+  {/* STATUS */}
+  <span className="text-teal-600 font-bold text-xs flex items-center gap-2 uppercase tracking-widest">
+    {project.status === 'Completed' ? (
+      <>
+        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+        Completed Project
+      </>
+    ) : (
+      <>
+        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+        Ongoing Project
+      </>
+    )}
+  </span>
 
-          <div className="lg:col-span-2 space-y-10">
+  {/* CATEGORY (REPLACES PRICE) */}
+  <div className="flex items-baseline gap-4 mt-3">
+    <h2 className="text-5xl font-black text-gray-900 tracking-tight">
+      {project.category}
+    </h2>
+  </div>
 
-            {/* PROJECT META (REPLACED PRICE) */}
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-              <h2 className="text-5xl font-black text-gray-900">
-                {project.category}
-              </h2>
+  {/* YEAR (REPLACES DOWN PAYMENT) */}
+  <p className="text-gray-500 font-semibold mt-1">
+    Year Completed{' '}
+    <span className="text-gray-900 font-extrabold">
+      {project.yearCompleted || 'N/A'}
+    </span>
+  </p>
 
-              <p className="text-gray-500 font-semibold mt-2">
-                Year Completed{' '}
-                <span className="text-gray-900 font-extrabold">
-                  {project.yearCompleted || 'N/A'}
-                </span>
-              </p>
-            </div>
+  {/* METRICS (REPLACES BEDS/BATHS UI BUT CLEANED) */}
+  <div className="mt-8 flex items-center gap-8 pt-8 border-t border-gray-50">
+
+    <div className="flex items-center gap-2.5">
+      <Icon icon="mdi:bed-outline" className="text-2xl text-gray-400" />
+      <span className="text-sm font-bold text-gray-800">
+        {project.metrics?.beds || 0} Beds
+      </span>
+    </div>
+
+    <div className="flex items-center gap-2.5">
+      <Icon icon="mdi:shower-outline" className="text-2xl text-gray-400" />
+      <span className="text-sm font-bold text-gray-800">
+        {project.metrics?.baths || 0} Baths
+      </span>
+    </div>
+
+    <div className="flex items-center gap-2.5">
+      <Icon icon="mdi:ruler-square" className="text-2xl text-gray-400" />
+      <span className="text-sm font-bold text-gray-800">
+        {project.metrics?.size || 'N/A'}
+      </span>
+    </div>
+
+  </div>
+</div>
 
             {/* OVERVIEW */}
             <div>
